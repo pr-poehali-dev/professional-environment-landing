@@ -58,179 +58,395 @@ const events = [
   },
 ];
 
-type FormState = { name: string; email: string; phone: string };
+const advantages = [
+  {
+    icon: "Award",
+    title: "Сертификация",
+    desc: "Официальные документы и сертификаты после завершения каждого модуля. Признаются ведущими работодателями.",
+  },
+  {
+    icon: "Users",
+    title: "Экспертное окружение",
+    desc: "Доступ к закрытому сообществу профессионалов, менторов и специалистов высокого уровня.",
+  },
+  {
+    icon: "TrendingUp",
+    title: "Карьерный рост",
+    desc: "Системная работа над профессиональным профилем с измеримыми результатами.",
+  },
+  {
+    icon: "Shield",
+    title: "Гарантия качества",
+    desc: "Программа разработана практикующими экспертами с многолетним опытом в своих областях.",
+  },
+];
 
 export default function Index() {
-  const [selected, setSelected] = useState<number | null>(null);
-  const [form, setForm] = useState<FormState>({ name: "", email: "", phone: "" });
+  const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
   const [sent, setSent] = useState(false);
-
-  const selectedEvent = selected !== null ? events[selected] : null;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSent(true);
   };
 
-  const closeModal = () => {
-    setSelected(null);
-    setSent(false);
-    setForm({ name: "", email: "", phone: "" });
-  };
-
   return (
-    <div className="min-h-screen bg-white text-gray-900 font-sans">
+    <div className="min-h-screen bg-graphite-950 text-cream font-ibm overflow-x-hidden">
 
       {/* NAV */}
-      <nav className="sticky top-0 z-40 bg-white border-b border-gray-100">
-        <div className="max-w-3xl mx-auto px-4 h-14 flex items-center justify-between">
-          <span className="font-semibold text-gray-900 tracking-tight">Профессиональная среда</span>
-          <a
-            href="#events"
-            className="text-sm text-gray-500 hover:text-gray-900 transition-colors"
-          >
-            Расписание
-          </a>
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-graphite-950/90 backdrop-blur-sm border-b border-graphite-700">
+        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+          <div className="font-cormorant text-xl font-semibold tracking-widest text-gold uppercase">
+            Профессиональная Среда
+          </div>
+          <div className="hidden md:flex items-center gap-8 text-sm text-cream-muted tracking-wider">
+            <a href="#about" className="hover:text-cream transition-colors">О проекте</a>
+            <a href="#advantages" className="hover:text-cream transition-colors">Преимущества</a>
+            <a href="#events" className="hover:text-cream transition-colors">События</a>
+            <a href="#contact" className="hover:text-cream transition-colors">Контакты</a>
+          </div>
         </div>
       </nav>
 
       {/* HERO */}
-      <section className="max-w-3xl mx-auto px-4 pt-14 pb-10">
-        <h1 className="text-3xl md:text-4xl font-semibold text-gray-900 leading-snug">
-          Открытые вебинары<br />по психологии и психиатрии
-        </h1>
-        <p className="mt-3 text-gray-500 text-base max-w-xl leading-relaxed">
-          Каждый месяц — живая встреча с практикующим специалистом. Выберите тему и запишитесь.
-        </p>
-      </section>
+      <section className="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden">
+        <div className="absolute inset-0 bg-graphite-950">
+          <div
+            className="absolute inset-0 opacity-[0.03]"
+            style={{
+              backgroundImage:
+                "repeating-linear-gradient(0deg, transparent, transparent 79px, #b8963e 79px, #b8963e 80px), repeating-linear-gradient(90deg, transparent, transparent 79px, #b8963e 79px, #b8963e 80px)",
+            }}
+          />
+        </div>
+        <div className="absolute right-0 top-1/4 w-px h-64 bg-gradient-to-b from-transparent via-gold to-transparent opacity-40" />
+        <div className="absolute left-0 bottom-1/4 w-px h-48 bg-gradient-to-b from-transparent via-gold-dark to-transparent opacity-30" />
 
-      {/* EVENTS */}
-      <section id="events" className="max-w-3xl mx-auto px-4 pb-20">
-        <div className="divide-y divide-gray-100 border border-gray-100 rounded-xl overflow-hidden">
-          {events.map((event, i) => (
-            <button
-              key={i}
-              onClick={() => { setSelected(i); setSent(false); }}
-              className="w-full text-left flex items-start gap-5 px-5 py-5 hover:bg-gray-50 transition-colors group"
+        <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
+          <div className="animate-fade-in" style={{ animationDelay: "0.1s" }}>
+            <span className="inline-block text-xs tracking-[0.3em] text-gold uppercase mb-8 font-ibm font-light">
+              Профессиональное развитие · Сертификация · Нетворкинг
+            </span>
+          </div>
+
+          <h1
+            className="font-cormorant text-6xl md:text-8xl font-light leading-none tracking-tight text-cream animate-fade-in"
+            style={{ animationDelay: "0.25s" }}
+          >
+            Среда, которая
+            <br />
+            <em className="font-light italic text-gold">формирует</em>
+            <br />
+            профессионалов
+          </h1>
+
+          <div className="mt-8 h-px w-24 bg-gold mx-auto animate-line-grow" style={{ animationDelay: "0.6s" }} />
+
+          <p
+            className="mt-8 text-lg md:text-xl text-cream-muted font-light max-w-2xl mx-auto leading-relaxed animate-fade-in"
+            style={{ animationDelay: "0.5s" }}
+          >
+            Закрытая платформа для роста и развития. Получите официальные сертификаты,
+            войдите в сообщество экспертов и выведите карьеру на новый уровень.
+          </p>
+
+          <div
+            className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in"
+            style={{ animationDelay: "0.7s" }}
+          >
+            <a
+              href="#contact"
+              className="px-10 py-4 bg-gold text-graphite-950 font-ibm font-medium text-sm tracking-widest uppercase hover:bg-gold-light transition-all duration-300 hover:shadow-[0_0_40px_rgba(184,150,62,0.3)]"
             >
-              {/* Дата */}
-              <div className="shrink-0 w-11 text-center pt-0.5">
-                <div className="text-2xl font-semibold text-gray-900 leading-none">{event.date}</div>
-                <div className="text-[11px] text-gray-400 mt-0.5 uppercase tracking-wide">{event.month}</div>
-              </div>
+              Подать заявку
+            </a>
+            <a
+              href="#events"
+              className="px-10 py-4 border border-graphite-600 text-cream-muted font-ibm font-light text-sm tracking-widest uppercase hover:border-gold hover:text-cream transition-all duration-300"
+            >
+              Календарь событий
+            </a>
+          </div>
+        </div>
 
-              {/* Контент */}
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-1.5 mb-1">
-                  <Icon name="Clock" size={12} className="text-gray-400" />
-                  <span className="text-xs text-gray-400">{event.time}</span>
-                  {event.course && (
-                    <>
-                      <span className="text-gray-300 text-xs">·</span>
-                      <span className="text-xs text-indigo-500">{event.course}</span>
-                    </>
-                  )}
-                </div>
-                <div className="text-gray-900 font-medium text-sm leading-snug">{event.title}</div>
-                <div className="text-gray-400 text-sm mt-0.5">{event.speaker}</div>
-              </div>
-
-              {/* CTA */}
-              <div className="shrink-0 self-center">
-                <span className="text-xs font-medium text-indigo-600 bg-indigo-50 px-3 py-1.5 rounded-full group-hover:bg-indigo-100 transition-colors whitespace-nowrap">
-                  Записаться
-                </span>
-              </div>
-            </button>
-          ))}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+          <Icon name="ChevronDown" size={20} className="text-graphite-600" />
         </div>
       </section>
 
-      {/* MODAL */}
-      {selected !== null && (
-        <div
-          className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/40 backdrop-blur-sm px-4 pb-4 sm:pb-0"
-          onClick={(e) => e.target === e.currentTarget && closeModal()}
-        >
-          <div className="bg-white w-full max-w-md rounded-2xl shadow-2xl overflow-hidden animate-scale-in">
-            {/* Шапка */}
-            <div className="px-6 pt-6 pb-4 border-b border-gray-100">
-              <div className="flex items-start justify-between gap-3">
-                <div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="text-xs font-medium text-gray-400">{selectedEvent!.date} {selectedEvent!.month} · {selectedEvent!.time}</span>
+      {/* ABOUT */}
+      <section id="about" className="py-32 bg-graphite-900">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <div>
+              <span className="text-xs tracking-[0.3em] text-gold uppercase font-light">О проекте</span>
+              <h2 className="font-cormorant text-5xl md:text-6xl font-light text-cream mt-4 leading-tight">
+                Профессиональная
+                <br />
+                <em className="italic text-gold">среда</em> — не курс,
+                <br />а экосистема
+              </h2>
+              <div className="mt-6 h-px w-16 bg-gold" />
+            </div>
+            <div className="space-y-6 text-cream-muted font-light leading-relaxed">
+              <p className="text-base">
+                Мы создали пространство, где профессионалы развиваются, обмениваются опытом
+                и получают признание своей экспертизы в виде официальных документов.
+              </p>
+              <p className="text-base">
+                Каждый участник проходит структурированную программу с практическими заданиями,
+                менторской поддержкой и итоговой сертификацией. Ваши знания — подтверждены документально.
+              </p>
+              <div className="grid grid-cols-2 gap-6 pt-4">
+                {[
+                  { num: "500+", label: "Выпускников" },
+                  { num: "47", label: "Экспертов" },
+                  { num: "12", label: "Программ" },
+                  { num: "96%", label: "Рекомендуют" },
+                ].map((stat) => (
+                  <div key={stat.label} className="border-l-2 border-gold pl-4">
+                    <div className="font-cormorant text-3xl text-gold font-light">{stat.num}</div>
+                    <div className="text-xs text-cream-muted tracking-wider uppercase mt-1">{stat.label}</div>
                   </div>
-                  <h2 className="text-base font-semibold text-gray-900 leading-snug">{selectedEvent!.title}</h2>
-                  <p className="text-sm text-gray-500 mt-0.5">{selectedEvent!.speaker}</p>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ADVANTAGES */}
+      <section id="advantages" className="py-32 bg-graphite-950">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-20">
+            <span className="text-xs tracking-[0.3em] text-gold uppercase font-light">Ключевые преимущества</span>
+            <h2 className="font-cormorant text-5xl md:text-6xl font-light text-cream mt-4">
+              Почему выбирают нас
+            </h2>
+            <div className="mt-6 h-px w-16 bg-gold mx-auto" />
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-px bg-graphite-700">
+            {advantages.map((item, i) => (
+              <div key={i} className="bg-graphite-950 p-10 group hover:bg-graphite-900 transition-colors duration-300">
+                <div className="flex items-start gap-6">
+                  <div className="w-12 h-12 border border-gold/30 flex items-center justify-center shrink-0 group-hover:border-gold transition-colors duration-300">
+                    <Icon name={item.icon} size={20} className="text-gold" />
+                  </div>
+                  <div>
+                    <h3 className="font-cormorant text-2xl font-light text-cream mb-3">{item.title}</h3>
+                    <p className="text-cream-muted font-light text-sm leading-relaxed">{item.desc}</p>
+                  </div>
                 </div>
-                <button onClick={closeModal} className="shrink-0 text-gray-400 hover:text-gray-600 transition-colors mt-0.5">
-                  <Icon name="X" size={18} />
-                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CERTIFICATES */}
+      <section className="py-20 bg-graphite-800 border-y border-graphite-700">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="flex items-center gap-6">
+              <div className="w-16 h-16 border-2 border-gold flex items-center justify-center">
+                <Icon name="FileText" size={28} className="text-gold" />
+              </div>
+              <div>
+                <h3 className="font-cormorant text-3xl font-light text-cream">Официальные документы</h3>
+                <p className="text-cream-muted font-light text-sm mt-1">
+                  Сертификаты с юридической силой · Дипломы · Удостоверения
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center gap-8 text-sm text-cream-muted font-light">
+              {["PDF + оригинал", "QR-верификация", "Международный формат"].map((t) => (
+                <div key={t} className="flex items-center gap-2">
+                  <div className="w-1 h-1 bg-gold rounded-full" />
+                  {t}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* EVENTS */}
+      <section id="events" className="py-32 bg-graphite-900">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="mb-16">
+            <span className="text-xs tracking-[0.3em] text-gold uppercase font-light">Ближайшие события</span>
+            <h2 className="font-cormorant text-5xl md:text-6xl font-light text-cream mt-4">
+              Календарь программ
+            </h2>
+            <div className="mt-6 h-px w-16 bg-gold" />
+          </div>
+
+          <div className="space-y-px">
+            {events.map((event, i) => (
+              <div
+                key={i}
+                className="flex items-start gap-6 md:gap-10 bg-graphite-800 hover:bg-graphite-700 transition-colors duration-300 px-6 md:px-8 py-6 md:py-7 group cursor-pointer"
+              >
+                {/* Дата */}
+                <div className="text-center w-14 shrink-0 pt-1">
+                  <div className="font-cormorant text-4xl font-light text-gold leading-none">{event.date}</div>
+                  <div className="text-[10px] tracking-widest text-cream-muted mt-1 uppercase">{event.month}</div>
+                </div>
+
+                <div className="w-px self-stretch bg-graphite-600 shrink-0" />
+
+                {/* Контент */}
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-1">
+                    <Icon name="Clock" size={12} className="text-gold/60 shrink-0" />
+                    <span className="text-xs text-gold/70 font-light tracking-wider">{event.time}</span>
+                  </div>
+                  <h3 className="font-cormorant text-xl md:text-2xl text-cream font-light leading-snug">{event.title}</h3>
+                  <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-2">
+                    <span className="text-sm text-cream-muted font-light">{event.speaker}</span>
+                    {event.course && (
+                      <>
+                        <span className="text-graphite-600 text-xs">·</span>
+                        <span className="text-xs text-gold/60 tracking-wide uppercase font-light">{event.course}</span>
+                      </>
+                    )}
+                  </div>
+                </div>
+
+                {/* Стрелка */}
+                <div className="hidden md:flex w-8 h-8 border border-graphite-600 group-hover:border-gold items-center justify-center transition-colors duration-300 shrink-0 mt-1">
+                  <Icon name="ArrowRight" size={14} className="text-cream-muted group-hover:text-gold transition-colors duration-300" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA BANNER */}
+      <section className="py-24 bg-graphite-950 relative overflow-hidden">
+        <div
+          className="absolute inset-0 opacity-5"
+          style={{ backgroundImage: "radial-gradient(circle at 50% 50%, #b8963e 0%, transparent 70%)" }}
+        />
+        <div className="relative max-w-3xl mx-auto px-6 text-center">
+          <h2 className="font-cormorant text-5xl md:text-6xl font-light text-cream leading-tight">
+            Готовы сделать
+            <br />
+            <em className="italic text-gold">следующий шаг?</em>
+          </h2>
+          <p className="mt-6 text-cream-muted font-light max-w-xl mx-auto leading-relaxed">
+            Присоединяйтесь к программе и получите подтверждение своей экспертизы в виде официального сертификата.
+          </p>
+          <a
+            href="#contact"
+            className="inline-block mt-10 px-12 py-5 bg-gold text-graphite-950 font-ibm font-medium text-sm tracking-widest uppercase hover:bg-gold-light transition-all duration-300 hover:shadow-[0_0_60px_rgba(184,150,62,0.4)]"
+          >
+            Записаться на программу
+          </a>
+        </div>
+      </section>
+
+      {/* CONTACT */}
+      <section id="contact" className="py-32 bg-graphite-900">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-20">
+            <div>
+              <span className="text-xs tracking-[0.3em] text-gold uppercase font-light">Контакты</span>
+              <h2 className="font-cormorant text-5xl font-light text-cream mt-4 leading-tight">
+                Свяжитесь
+                <br />с нами
+              </h2>
+              <div className="mt-6 h-px w-16 bg-gold" />
+              <div className="mt-10 space-y-6">
+                {[
+                  { icon: "MapPin", label: "Адрес", value: "Москва, Бизнес-центр «Профессионал»" },
+                  { icon: "Phone", label: "Телефон", value: "+7 (495) 000-00-00" },
+                  { icon: "Mail", label: "Email", value: "info@profsreda.ru" },
+                  { icon: "Clock", label: "Режим работы", value: "Пн–Пт, 9:00–18:00" },
+                ].map((item) => (
+                  <div key={item.label} className="flex items-start gap-4">
+                    <div className="w-10 h-10 border border-graphite-600 flex items-center justify-center shrink-0">
+                      <Icon name={item.icon} size={16} className="text-gold" />
+                    </div>
+                    <div>
+                      <div className="text-xs text-cream-muted tracking-wider uppercase">{item.label}</div>
+                      <div className="text-cream font-light mt-1">{item.value}</div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
 
-            {/* Форма / Успех */}
-            <div className="px-6 py-5">
+            <div>
               {sent ? (
-                <div className="text-center py-4">
-                  <div className="w-12 h-12 rounded-full bg-green-50 flex items-center justify-center mx-auto mb-3">
-                    <Icon name="Check" size={22} className="text-green-500" />
+                <div className="h-full flex flex-col items-center justify-center text-center py-16">
+                  <div className="w-16 h-16 border-2 border-gold flex items-center justify-center mb-6">
+                    <Icon name="Check" size={28} className="text-gold" />
                   </div>
-                  <p className="font-medium text-gray-900">Заявка принята!</p>
-                  <p className="text-sm text-gray-500 mt-1">Мы свяжемся с вами ближе к дате события.</p>
-                  <button
-                    onClick={closeModal}
-                    className="mt-4 text-sm text-indigo-600 hover:underline"
-                  >
-                    Закрыть
-                  </button>
+                  <h3 className="font-cormorant text-3xl text-cream font-light">Заявка отправлена</h3>
+                  <p className="text-cream-muted font-light mt-3 text-sm">
+                    Мы свяжемся с вами в течение рабочего дня
+                  </p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-3">
-                  <div>
-                    <label className="block text-xs text-gray-500 mb-1">Имя</label>
-                    <input
-                      required
-                      type="text"
-                      placeholder="Ваше имя"
-                      value={form.name}
-                      onChange={(e) => setForm({ ...form, name: e.target.value })}
-                      className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm text-gray-900 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-400 transition"
-                    />
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="text-sm text-cream-muted font-light tracking-wider uppercase mb-6">
+                    Форма заявки
                   </div>
+                  {[
+                    { field: "name", label: "Ваше имя", type: "text" },
+                    { field: "email", label: "Email", type: "email" },
+                    { field: "phone", label: "Телефон", type: "tel" },
+                  ].map((item) => (
+                    <div key={item.field}>
+                      <label className="block text-xs text-cream-muted tracking-wider uppercase mb-2">
+                        {item.label}
+                      </label>
+                      <input
+                        type={item.type}
+                        value={form[item.field as keyof typeof form]}
+                        onChange={(e) => setForm({ ...form, [item.field]: e.target.value })}
+                        className="w-full bg-graphite-800 border border-graphite-600 text-cream font-light text-sm px-4 py-3 focus:outline-none focus:border-gold transition-colors duration-200 placeholder:text-graphite-500"
+                        placeholder={item.label}
+                      />
+                    </div>
+                  ))}
                   <div>
-                    <label className="block text-xs text-gray-500 mb-1">Email</label>
-                    <input
-                      required
-                      type="email"
-                      placeholder="example@mail.ru"
-                      value={form.email}
-                      onChange={(e) => setForm({ ...form, email: e.target.value })}
-                      className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm text-gray-900 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-400 transition"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs text-gray-500 mb-1">Телефон</label>
-                    <input
-                      type="tel"
-                      placeholder="+7 (___) ___-__-__"
-                      value={form.phone}
-                      onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                      className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm text-gray-900 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-400 transition"
+                    <label className="block text-xs text-cream-muted tracking-wider uppercase mb-2">
+                      Сообщение
+                    </label>
+                    <textarea
+                      value={form.message}
+                      onChange={(e) => setForm({ ...form, message: e.target.value })}
+                      rows={4}
+                      className="w-full bg-graphite-800 border border-graphite-600 text-cream font-light text-sm px-4 py-3 focus:outline-none focus:border-gold transition-colors duration-200 resize-none placeholder:text-graphite-500"
+                      placeholder="Расскажите о вашем запросе..."
                     />
                   </div>
                   <button
                     type="submit"
-                    className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-sm py-3 rounded-lg transition-colors mt-1"
+                    className="w-full py-4 bg-gold text-graphite-950 font-ibm font-medium text-sm tracking-widest uppercase hover:bg-gold-light transition-all duration-300 mt-2"
                   >
-                    Записаться на вебинар
+                    Отправить заявку
                   </button>
                 </form>
               )}
             </div>
           </div>
         </div>
-      )}
+      </section>
+
+      {/* FOOTER */}
+      <footer className="py-10 bg-graphite-950 border-t border-graphite-800">
+        <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="font-cormorant text-lg font-light tracking-widest text-gold uppercase">
+            Профессиональная Среда
+          </div>
+          <p className="text-xs text-graphite-500 tracking-wider">© 2026 · Все права защищены</p>
+        </div>
+      </footer>
     </div>
   );
 }
