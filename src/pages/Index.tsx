@@ -2,10 +2,60 @@ import { useState } from "react";
 import Icon from "@/components/ui/icon";
 
 const events = [
-  { date: "12 марта", month: "МАР", title: "Открытый семинар", desc: "Введение в профессиональную среду", seats: "18 мест" },
-  { date: "28 марта", month: "МАР", title: "Мастер-класс", desc: "Практические инструменты профессионала", seats: "12 мест" },
-  { date: "15 апреля", month: "АПР", title: "Итоговая сессия", desc: "Защита проектов и вручение сертификатов", seats: "30 мест" },
-  { date: "3 мая", month: "МАЙ", title: "Интенсив выходного дня", desc: "Углублённая работа с экспертами", seats: "8 мест" },
+  {
+    date: "11", month: "МАР", time: "19:00–20:30",
+    speaker: "Архангельская Наталья",
+    title: "Психопатология",
+    course: "Психиатрическая пропедевтика",
+  },
+  {
+    date: "15", month: "АПР", time: "19:00–20:30",
+    speaker: "Степанова Екатерина",
+    title: "Диагностика, которая лечит: как на первом интервью заложить основу стратегии и запустить изменения",
+    course: "Девиантное поведение",
+  },
+  {
+    date: "13", month: "МАЙ", time: "19:00–20:30",
+    speaker: "Марченко Татьяна",
+    title: "Психотерапия панических атак",
+    course: "",
+  },
+  {
+    date: "10", month: "ИЮН", time: "19:00–20:30",
+    speaker: "Карпуль Анна",
+    title: "Призвание или симуляция в профессии психоаналитика или психолога (психотерапевта)",
+    course: "Психиатрическая пропедевтика",
+  },
+  {
+    date: "8", month: "ИЮЛ", time: "19:00–20:30",
+    speaker: "Мельник Екатерина",
+    title: "Перенос / контрперенос — с разбором кейсов",
+    course: "Основы психоанализа",
+  },
+  {
+    date: "12", month: "АВГ", time: "19:00–20:30",
+    speaker: "Степанова Екатерина",
+    title: "Диагностика, которая лечит: как на первом интервью заложить основу стратегии и запустить изменения",
+    course: "Девиантное поведение",
+  },
+  {
+    date: "9", month: "СЕН", time: "19:00–20:30",
+    speaker: "Пекарская Светлана",
+    title: "Управление разрушением: специфика работы с шоковыми состояниями клиента",
+    course: "Психология агрессии · Девиантное поведение",
+  },
+  {
+    date: "14", month: "ОКТ", time: "19:00–20:30",
+    speaker: "Чуйкова Марина",
+    title: "Агрессия и безопасность в работе психолога с клиентом",
+    course: "Психология агрессии",
+  },
+  {
+    date: "11", month: "НОЯ", time: "19:00–20:30",
+    speaker: "Митрофанов Сергей",
+    title: "Перенос / контрперенос — с разбором кейсов",
+    course: "",
+  },
 ];
 
 const advantages = [
@@ -236,24 +286,37 @@ export default function Index() {
             {events.map((event, i) => (
               <div
                 key={i}
-                className="flex items-center gap-8 bg-graphite-800 hover:bg-graphite-700 transition-colors duration-300 px-8 py-6 group cursor-pointer"
+                className="flex items-start gap-6 md:gap-10 bg-graphite-800 hover:bg-graphite-700 transition-colors duration-300 px-6 md:px-8 py-6 md:py-7 group cursor-pointer"
               >
-                <div className="text-center w-16 shrink-0">
-                  <div className="font-cormorant text-3xl font-light text-gold leading-none">
-                    {event.date.split(" ")[0]}
-                  </div>
-                  <div className="text-xs tracking-widest text-cream-muted mt-1">{event.month}</div>
+                {/* Дата */}
+                <div className="text-center w-14 shrink-0 pt-1">
+                  <div className="font-cormorant text-4xl font-light text-gold leading-none">{event.date}</div>
+                  <div className="text-[10px] tracking-widest text-cream-muted mt-1 uppercase">{event.month}</div>
                 </div>
-                <div className="w-px h-12 bg-graphite-600 shrink-0" />
-                <div className="flex-1">
-                  <h3 className="font-cormorant text-xl text-cream font-light">{event.title}</h3>
-                  <p className="text-cream-muted text-sm font-light mt-1">{event.desc}</p>
-                </div>
-                <div className="hidden md:flex items-center gap-6">
-                  <span className="text-xs text-cream-muted tracking-wider">{event.seats}</span>
-                  <div className="w-8 h-8 border border-graphite-600 group-hover:border-gold flex items-center justify-center transition-colors duration-300">
-                    <Icon name="ArrowRight" size={14} className="text-cream-muted group-hover:text-gold transition-colors duration-300" />
+
+                <div className="w-px self-stretch bg-graphite-600 shrink-0" />
+
+                {/* Контент */}
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-1">
+                    <Icon name="Clock" size={12} className="text-gold/60 shrink-0" />
+                    <span className="text-xs text-gold/70 font-light tracking-wider">{event.time}</span>
                   </div>
+                  <h3 className="font-cormorant text-xl md:text-2xl text-cream font-light leading-snug">{event.title}</h3>
+                  <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-2">
+                    <span className="text-sm text-cream-muted font-light">{event.speaker}</span>
+                    {event.course && (
+                      <>
+                        <span className="text-graphite-600 text-xs">·</span>
+                        <span className="text-xs text-gold/60 tracking-wide uppercase font-light">{event.course}</span>
+                      </>
+                    )}
+                  </div>
+                </div>
+
+                {/* Стрелка */}
+                <div className="hidden md:flex w-8 h-8 border border-graphite-600 group-hover:border-gold items-center justify-center transition-colors duration-300 shrink-0 mt-1">
+                  <Icon name="ArrowRight" size={14} className="text-cream-muted group-hover:text-gold transition-colors duration-300" />
                 </div>
               </div>
             ))}
